@@ -1,4 +1,29 @@
 const Card = (article) => {
+
+  const articleWrapper = document.createElement('div')
+  const headline = document.createElement('div')
+  const author = document.createElement('div')
+  const imgContainer = document.createElement('div')
+  const img = document.createElement('img')
+  const authorName = document.createElement('span')
+
+  articleWrapper.classList.add('card')
+  headline.classList.add('headline')
+  author.classList.add('author')
+  imgContainer.classList.add('img-container')
+
+  articleWrapper.appendChild(headline)
+  articleWrapper.appendChild(author)
+  author.appendChild(imgContainer)
+  imgContainer.appendChild(img)
+  author.appendChild(authorName)
+
+  authorName.textContent = article.authorName
+  headline.textContent = article.headline;
+  img.src = article.authorPhoto;
+  return articleWrapper
+
+
   // TASK 5
   // ---------------------
   // Implement this function, which should return the markup you see below.

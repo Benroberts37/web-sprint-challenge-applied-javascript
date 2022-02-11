@@ -1,3 +1,5 @@
+import { header } from "express/lib/request";
+
 const Header = (title, date, temp) => {
 
   const theHeader = document.createElement('div');
@@ -35,6 +37,7 @@ const Header = (title, date, temp) => {
 }
 
 const headerAppender = (selector) => {
+  document.querySelector(selector).appendChild(Header())
   // TASK 2
   // ---------------------
   // Implement this function taking a css selector as its only argument.
