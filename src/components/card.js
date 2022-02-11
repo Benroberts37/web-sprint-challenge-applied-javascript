@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { all } from 'express/lib/application'
+//import { all } from 'express/lib/application'
 
 const Card = (article) => {
 
@@ -68,9 +68,9 @@ const cardAppender = (selector) => {
 
   tabs.forEach(tab => {
     const articles = allTheArticles[tab]
-    articles.forEach(article =>{
-      const card = Card(article)
-      parentElement.appendChild(card)
+      articles.forEach(article =>{
+        const card = Card(article)
+        parentElement.appendChild(card)
     })
   })
     
