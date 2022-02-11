@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { topics } from '../mocks/data'
 
 const Tabs = (topics) => {
 
@@ -6,7 +7,9 @@ const Tabs = (topics) => {
 
   theTopics.classList.add('topics')
 
-  topics.forEach(text => {
+  const array = Array.from(topics)
+
+  array.forEach(text => {
   const theTabs = document.createElement('div')
   theTabs.textContent = text;
   theTopics.appendChild(theTabs);
@@ -32,12 +35,16 @@ const Tabs = (topics) => {
 }
 
 const tabsAppender = (selector) => {
-  axios.get(`http://localhost:5000/api/topics`)
-  .then(resp => {
-    console.log(resp);
-  })
-  .catch(err => console.log(err))
-  .finally(() => console.log('done!'))
+  
+  const parentElement = document.querySelector(selector)
+    axios.get(`http://localhost:5000/api/topics`)
+    .then((res) => {
+      const data = res.data.topics;
+      parentElement.appendChild(Tabs(data))
+    })
+   .catch(err => console.log(err))
+   .finally(() => console.log('done!'))
+
   // TASK 4
   // ---------------------
   // Implement this function which takes a css selector as its only argument.
@@ -48,3 +55,13 @@ const tabsAppender = (selector) => {
 }
 
 export { Tabs, tabsAppender }
+
+
+  // axios.get(`http://localhost:5000/api/topics`)
+  // .then(resp => {
+  //     const data = resp.data.topics
+  //     console.log(data)
+  //     parentElement.appendChild(Tabs())
+  // })
+  // .catch(err => console.log(err))
+  // .finally(() => console.log('done!'))

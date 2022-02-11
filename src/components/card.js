@@ -1,3 +1,6 @@
+import axios from 'axios'
+import { all } from 'express/lib/application'
+
 const Card = (article) => {
 
   const articleWrapper = document.createElement('div')
@@ -21,6 +24,7 @@ const Card = (article) => {
   authorName.textContent = article.authorName
   headline.textContent = article.headline;
   img.src = article.authorPhoto;
+
   return articleWrapper
 
 
@@ -44,7 +48,42 @@ const Card = (article) => {
   //
 }
 
+// const articleList = (data) => {
+//   console.log(data)
+//   const section = document.createElement("section")
+//   const array = Array.from(data)
+//   array.forEach(articleData => {
+//     section.appendChild(Card(articleData))
+//   })
+//   return section;
+// }
+
+
 const cardAppender = (selector) => {
+  axios.get(`http://localhost:5000/api/articles`)
+  .then(resp => {
+  const parentElement = document.querySelector(selector)
+  const allTheArticles = resp.data.articles;
+  const tabs = Object.keys(allTheArticles)
+
+  tabs.forEach(tab => {
+    const articles = allTheArticles[tab]
+    articles.forEach(article =>{
+      const card = Card(article)
+      parentElement.appendChild(card)
+    })
+  })
+    
+    const data = resp.data.articles
+    console.log(data)
+    //let combinedArticleArray = []
+    //combinedArticleArray.push(...resp.data.articles.boostrap,...resp.data.articles.javascript,...resp.data.articles.jquery,...resp.data.articles.node,...resp.data.articles.technology)
+    //console.log(combinedArticleArray)
+  })
+  .catch(err => console.log(err))
+  .finally(() => console.log('done!'))
+
+
   // TASK 6
   // ---------------------
   // Implement this function that takes a css selector as its only argument.
